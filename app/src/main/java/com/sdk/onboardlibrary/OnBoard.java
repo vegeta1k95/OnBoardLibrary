@@ -8,4 +8,8 @@ public class OnBoard {
         if (!OnBoardActivity.isOnBoardShown(activity))
             activity.startActivity(new Intent(activity, OnBoardActivity.class));
     }
+
+    public static void addLayout(String name) {
+        OnBoardActivity.onBoardLayouts.add(name);
+    }
 }

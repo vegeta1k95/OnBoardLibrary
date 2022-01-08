@@ -41,6 +41,7 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
     public static List<String> onBoardLayouts = new ArrayList<>();
+
     static class PageAdapter extends FragmentStateAdapter {
 
         PageAdapter(@NonNull FragmentActivity fragmentActivity) {
