@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <attr name="onboard_layouts" format="reference"/>
     <attr name="onboard_privacy_policy" format="reference|string"/>
 
     <attr name="onboard_status_bar_color" format="reference|color"/>
