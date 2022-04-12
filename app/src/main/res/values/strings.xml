@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="btn_next">Next</string>
+    <string name="btn_skip">Skip</string>
     <string name="onboard_tos">By continuing to use, you agree to our <u>Privacy Policy</u> and <u>Terms of Use</u></string>
 </resources>

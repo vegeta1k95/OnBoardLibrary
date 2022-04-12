@@ -1,0 +1,5 @@
+<resources>
+    <string name="onboard_tos">با ادامه استفاده، با سیاست حفظ حریم خصوصی و شرایط استفاده موافقت می کنید</string>
+    <string name="btn_next">بعد</string>
+    <string name="btn_skip">پرش کنید</string>
+</resources>

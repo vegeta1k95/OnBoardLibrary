@@ -1,0 +1,5 @@
+<resources>
+    <string name="onboard_tos">Continuando a utilizzare, accetti la nostra Informativa sulla privacy e le Condizioni d\'uso</string>
+    <string name="btn_next">Prossima</string>
+    <string name="btn_skip">Saltare</string>
+</resources>

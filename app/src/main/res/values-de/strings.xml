@@ -1,0 +1,5 @@
+<resources>
+    <string name="onboard_tos">Durch die weitere Nutzung stimmen Sie unserer Datenschutzrichtlinie und unseren Nutzungsbedingungen zu</string>
+    <string name="btn_next">Nächste</string>
+    <string name="btn_skip">Überspringen</string>
+</resources>
