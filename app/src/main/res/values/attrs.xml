@@ -3,13 +3,4 @@
 
     <attr name="onboard_layouts" format="reference"/>
     <attr name="onboard_privacy_policy" format="reference|string"/>
-
-    <attr name="onboard_status_bar_color" format="reference|color"/>
-    <attr name="onboard_background_color" format="reference|color"/>
-
-    <attr name="onboard_tabs_selected_color" format="reference|color"/>
-    <attr name="onboard_tabs_unselected_color" format="reference|color"/>
-
-    <attr name="onboard_button_color" format="reference|color"/>
-    <attr name="onboard_button_pressed_color" format="reference|color"/>
 </resources>
