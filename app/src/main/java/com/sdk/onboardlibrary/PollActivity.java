@@ -149,4 +149,7 @@ public class PollActivity extends AppCompatActivity {
         Linking.inflateOnBoardItem(this, 2,
                 item -> mAdapter.addLinking(item.toBundle()));
     }
+
+    @Override
+    public void onBackPressed() {}
 }

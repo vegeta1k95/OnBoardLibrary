@@ -13,7 +13,7 @@ import com.sdk.billinglibrary.Billing;
 
 public class OnBoardActivity extends AppCompatActivity {
 
-    private static final String KEY_FIRST_TIME = "first_time";
+    public static final String KEY_FIRST_TIME = "first_time";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,9 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
     private boolean isFirstTime() {
-        boolean isFirstTime = !getPreferences(MODE_PRIVATE).contains(KEY_FIRST_TIME);
-        getPreferences(MODE_PRIVATE).edit().putBoolean(KEY_FIRST_TIME, false).apply();
-        return isFirstTime;
+        return !getPreferences(MODE_PRIVATE).contains(KEY_FIRST_TIME);
     }
+
+    @Override
+    public void onBackPressed() {}
 }

@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.sdk.onboardlibrary.OnBoardActivity.KEY_FIRST_TIME;
+
 public class LoadingActivity extends AppCompatActivity {
 
     private ProgressBar pbLoading;
@@ -30,7 +32,12 @@ public class LoadingActivity extends AppCompatActivity {
         pbLoading = findViewById(res.getIdentifier("progress_loading", "id", getPackageName()));
         tvProgress = findViewById(res.getIdentifier("txt_progress", "id", getPackageName()));
 
+        notifyOnBoardDone();
         animate();
+    }
+
+    private void notifyOnBoardDone() {
+        getPreferences(MODE_PRIVATE).edit().putBoolean(KEY_FIRST_TIME, false).apply();
     }
 
     private void animate() {
@@ -54,4 +61,7 @@ public class LoadingActivity extends AppCompatActivity {
         });
         valueAnimator.start();
     }
+
+    @Override
+    public void onBackPressed() {}
 }
