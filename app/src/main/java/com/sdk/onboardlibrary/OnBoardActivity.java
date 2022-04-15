@@ -49,7 +49,7 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
     private boolean isFirstTime() {
-        return !getPreferences(MODE_PRIVATE).contains(KEY_FIRST_TIME);
+        return !getSharedPreferences("onboard", MODE_PRIVATE).contains(KEY_FIRST_TIME);
     }
 
     @Override

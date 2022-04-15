@@ -37,7 +37,7 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     private void notifyOnBoardDone() {
-        getPreferences(MODE_PRIVATE).edit().putBoolean(KEY_FIRST_TIME, false).apply();
+        getSharedPreferences("onboard", MODE_PRIVATE).edit().putBoolean(KEY_FIRST_TIME, false).apply();
     }
 
     private void animate() {
