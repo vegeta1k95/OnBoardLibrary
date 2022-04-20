@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.sdk.billinglibrary.Billing;
 import com.sdk.linkinglibrary.Linking;
 
 import java.util.ArrayList;
@@ -121,7 +122,12 @@ public class PollActivity extends AppCompatActivity {
                 }
                 mViewPager.setCurrentItem(current + 1);
             } else if (current == mPolls.size() + mLinks.size() - 1) {
-                startActivity(new Intent(this, LoadingActivity.class));
+                if (getResources().getIdentifier("activity_onboard_loading", "layout", getPackageName()) != 0)
+                    startActivity(new Intent(this, LoadingActivity.class));
+                else if (getResources().getIdentifier("activity_onboard_offer", "layout", getPackageName()) != 0)
+                    startActivity(new Intent(this, OfferActivity.class));
+                else
+                    Billing.startBillingActivity(this, false);
                 finish();
             }
         });
@@ -148,8 +154,13 @@ public class PollActivity extends AppCompatActivity {
                 mAdapter.addPoll(id);
         }
 
-        Linking.inflateOnBoardItem(this, 2,
-                item -> mAdapter.addLinking(item.toBundle()));
+        if (mAdapter.getItemCount() == 0) {
+            Billing.startBillingActivity(this, false);
+            finish();
+        } else {
+            Linking.inflateOnBoardItem(this, 2,
+                    item -> mAdapter.addLinking(item.toBundle()));
+        }
     }
 
     @Override
