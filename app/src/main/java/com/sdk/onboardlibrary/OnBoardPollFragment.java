@@ -49,13 +49,22 @@ public class OnBoardPollFragment extends Fragment {
 
         Resources res = mContext.getResources();
 
-        RadioGroup rg = view.findViewById(res.getIdentifier("radio_group", "id", mContext.getPackageName()));
-        rg.setOnCheckedChangeListener((group, checkedId) -> {
+        int rgId = res.getIdentifier("radio_group", "id", mContext.getPackageName());
+
+        if (rgId != 0) {
+            RadioGroup rg = view.findViewById(rgId);
+            rg.setOnCheckedChangeListener((group, checkedId) -> {
+                View btn = ((PollActivity) getActivity()).getNextButton();
+                btn.setClickable(true);
+                btn.findViewById(res.getIdentifier("txt_next", "id", mContext.getPackageName())).setEnabled(true);
+                btn.findViewById(res.getIdentifier("arrow_next", "id", mContext.getPackageName())).setEnabled(true);
+            });
+        } else {
             View btn = ((PollActivity) getActivity()).getNextButton();
             btn.setClickable(true);
             btn.findViewById(res.getIdentifier("txt_next", "id", mContext.getPackageName())).setEnabled(true);
             btn.findViewById(res.getIdentifier("arrow_next", "id", mContext.getPackageName())).setEnabled(true);
-        });
+        }
     }
 
 }
