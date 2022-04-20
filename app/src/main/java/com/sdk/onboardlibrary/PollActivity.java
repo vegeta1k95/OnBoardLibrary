@@ -142,9 +142,11 @@ public class PollActivity extends AppCompatActivity {
         new TabLayoutMediator(mTabLayout, mViewPager, (tab, position)
                 -> tab.view.setClickable(false)).attach();
 
-        mAdapter.addPoll(mRes.getIdentifier("fragment_onboard_poll1", "layout", getPackageName()));
-        mAdapter.addPoll(mRes.getIdentifier("fragment_onboard_poll2", "layout", getPackageName()));
-        mAdapter.addPoll(mRes.getIdentifier("fragment_onboard_poll3", "layout", getPackageName()));
+        for (int i = 1; i <= 5; i++) {
+            int id = mRes.getIdentifier("fragment_onboard_poll" + i, "layout", getPackageName());
+            if (id != 0)
+                mAdapter.addPoll(id);
+        }
 
         Linking.inflateOnBoardItem(this, 2,
                 item -> mAdapter.addLinking(item.toBundle()));
