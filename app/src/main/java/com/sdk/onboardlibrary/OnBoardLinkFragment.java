@@ -109,6 +109,6 @@ public class OnBoardLinkFragment extends Fragment {
 
         featuresIconUrls.add(imgUrl);
 
-        ImageDownloader.loadDrawablesFromCache(getContext(), images, featuresIconUrls);
+        ImageDownloader.loadDrawablesFromCache(getActivity(), images, featuresIconUrls);
     }
 }
