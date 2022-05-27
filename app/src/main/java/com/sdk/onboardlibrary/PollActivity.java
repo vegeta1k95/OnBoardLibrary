@@ -17,7 +17,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.sdk.billinglibrary.Billing;
-import com.sdk.linkinglibrary.Linking;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,6 @@ public class PollActivity extends AppCompatActivity {
     public static final String KEY_FRAGMENT = "fragment";
 
     private final List<Integer> mPolls = new ArrayList<>();
-    private final List<Bundle> mLinks = new ArrayList<>();
 
     private class TabsAdapter extends FragmentStateAdapter {
 
@@ -38,29 +36,18 @@ public class PollActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            if (position < mPolls.size()) {
-                int layoutId = mPolls.get(position);
-                return OnBoardPollFragment.newFragment(layoutId);
-            } else {
-                Bundle args = mLinks.get(position-mPolls.size());
-                return OnBoardLinkFragment.newFragment(args);
-            }
+            int layoutId = mPolls.get(position);
+            return OnBoardPollFragment.newFragment(layoutId);
         }
 
         @Override
         public int getItemCount() {
-            return mPolls.size() + mLinks.size();
+            return mPolls.size();
         }
 
         @SuppressLint("NotifyDataSetChanged")
         public void addPoll(int layoutId) {
             mPolls.add(layoutId);
-            notifyDataSetChanged();
-        }
-
-        @SuppressLint("NotifyDataSetChanged")
-        public void addLinking(Bundle args) {
-            mLinks.add(args);
             notifyDataSetChanged();
         }
     }
@@ -114,14 +101,14 @@ public class PollActivity extends AppCompatActivity {
 
         btnNext.setOnClickListener(v -> {
             int current = mViewPager.getCurrentItem();
-            if (current < mPolls.size() + mLinks.size() - 1) {
+            if (current < mPolls.size() - 1) {
                 if (current < mPolls.size() - 1) {
                     btnNext.setClickable(false);
                     tvNext.setEnabled(false);
                     ivNext.setEnabled(false);
                 }
                 mViewPager.setCurrentItem(current + 1);
-            } else if (current == mPolls.size() + mLinks.size() - 1) {
+            } else if (current == mPolls.size() - 1) {
                 if (getResources().getIdentifier("activity_onboard_loading", "layout", getPackageName()) != 0)
                     startActivity(new Intent(this, LoadingActivity.class));
                 else if (getResources().getIdentifier("activity_onboard_offer", "layout", getPackageName()) != 0)
@@ -157,9 +144,6 @@ public class PollActivity extends AppCompatActivity {
         if (mAdapter.getItemCount() == 0) {
             Billing.startBillingActivity(this, false);
             finish();
-        } else {
-            Linking.inflateOnBoardItem(this, 2,
-                    item -> mAdapter.addLinking(item.toBundle()));
         }
     }
 
