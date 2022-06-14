@@ -26,7 +26,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
-    implementation 'com.github.vegeta1k95:BillingLibrary:2.4.6'
+    implementation 'com.github.vegeta1k95:BillingLibrary:2.4.7'
 }
 
 afterEvaluate {
