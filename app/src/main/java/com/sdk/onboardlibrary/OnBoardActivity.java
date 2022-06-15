@@ -1,5 +1,6 @@
 package com.sdk.onboardlibrary;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -14,6 +15,15 @@ import com.sdk.billinglibrary.Billing;
 public class OnBoardActivity extends AppCompatActivity {
 
     public static final String KEY_FIRST_TIME = "first_time";
+    public static final String KEY_SKIP_OFFER = "skip_loading_offer";
+
+    public static void start(Activity activity, boolean skipLoadingAndOffer) {
+        if (activity != null) {
+            Intent intent = new Intent(activity, OnBoardActivity.class);
+            intent.putExtra(KEY_SKIP_OFFER, skipLoadingAndOffer);
+            activity.startActivity(intent);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +33,9 @@ public class OnBoardActivity extends AppCompatActivity {
         if (isFirstTime()) {
             setupLink();
             findViewById(R.id.btn_continue).setOnClickListener(v -> {
-                startActivity(new Intent(this, PollActivity.class));
+                Intent intent = new Intent(this, PollActivity.class);
+                intent.putExtra(KEY_SKIP_OFFER, getIntent().getBooleanExtra(KEY_SKIP_OFFER, false));
+                startActivity(intent);
                 finish();
             });
         } else {

@@ -52,6 +52,8 @@ public class PollActivity extends AppCompatActivity {
         }
     }
 
+    private boolean mSkipLoadingAndOffer = false;
+
     private Resources mRes;
 
     private TabsAdapter mAdapter;
@@ -84,6 +86,8 @@ public class PollActivity extends AppCompatActivity {
         tvNext = findViewById(mRes.getIdentifier("txt_next", "id", getPackageName()));
         ivNext = findViewById(mRes.getIdentifier("arrow_next", "id", getPackageName()));
 
+        mSkipLoadingAndOffer = getIntent().getBooleanExtra(OnBoardActivity.KEY_SKIP_OFFER, false);
+
         setupTabs();
 
         btnBack.setOnClickListener(v -> {
@@ -93,9 +97,13 @@ public class PollActivity extends AppCompatActivity {
         });
 
         btnSkip.setOnClickListener(v -> {
-            Intent intent = new Intent(this, OfferActivity.class);
-            intent.putExtra(OfferActivity.KEY_SKIP, true);
-            startActivity(intent);
+            if (mSkipLoadingAndOffer) {
+                Billing.startBillingActivity(this, false);
+            } else {
+                Intent intent = new Intent(this, OfferActivity.class);
+                intent.putExtra(OfferActivity.KEY_SKIP, true);
+                startActivity(intent);
+            }
             finish();
         });
 
@@ -109,17 +117,20 @@ public class PollActivity extends AppCompatActivity {
                 }
                 mViewPager.setCurrentItem(current + 1);
             } else if (current == mPolls.size() - 1) {
-                if (getResources().getIdentifier("activity_onboard_loading", "layout", getPackageName()) != 0)
-                    startActivity(new Intent(this, LoadingActivity.class));
-                else if (getResources().getIdentifier("activity_onboard_offer", "layout", getPackageName()) != 0)
-                    startActivity(new Intent(this, OfferActivity.class));
-                else
+                if (mSkipLoadingAndOffer) {
                     Billing.startBillingActivity(this, false);
+                } else {
+                    if (getResources().getIdentifier("activity_onboard_loading", "layout", getPackageName()) != 0)
+                        startActivity(new Intent(this, LoadingActivity.class));
+                    else if (getResources().getIdentifier("activity_onboard_offer", "layout", getPackageName()) != 0)
+                        startActivity(new Intent(this, OfferActivity.class));
+                    else
+                        Billing.startBillingActivity(this, false);
+                }
                 finish();
             }
         });
         btnNext.setClickable(false);
-
 
         Intent intent = getIntent();
         int fragment = intent.getIntExtra(KEY_FRAGMENT, 0);
