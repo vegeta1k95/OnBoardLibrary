@@ -35,6 +35,8 @@ public class OnBoardActivity extends AppCompatActivity {
             findViewById(R.id.btn_continue).setOnClickListener(v -> {
                 Intent intent = new Intent(this, PollActivity.class);
                 intent.putExtra(KEY_SKIP_OFFER, getIntent().getBooleanExtra(KEY_SKIP_OFFER, false));
+                if (getIntent().getBooleanExtra(KEY_SKIP_OFFER, false))
+                    notifyOnBoardDone();
                 startActivity(intent);
                 finish();
             });
@@ -62,6 +64,10 @@ public class OnBoardActivity extends AppCompatActivity {
 
     private boolean isFirstTime() {
         return !getSharedPreferences("onboard", MODE_PRIVATE).contains(KEY_FIRST_TIME);
+    }
+
+    private void notifyOnBoardDone() {
+        getSharedPreferences("onboard", MODE_PRIVATE).edit().putBoolean(KEY_FIRST_TIME, false).apply();
     }
 
     @Override
