@@ -11,5 +11,5 @@
     <attr name="onboard_tabs_unselected_color" format="reference|color"/>
 
     <attr name="onboard_button_color" format="reference|color"/>
-    <attr name="onboard_button_pressed_color" format="reference|color"/>
+
 </resources>

@@ -2,7 +2,6 @@ package com.sdk.onboardlibrary;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -72,8 +71,8 @@ public class OnBoardActivity extends AppCompatActivity {
         }
     }
 
-    private PageAdapter adapter;
-    private ViewPager2 pager;
+    private PageAdapter mAdapter;
+    private ViewPager2 mViewPager;
 
     @Override
     public void onBackPressed() {}
@@ -86,29 +85,29 @@ public class OnBoardActivity extends AppCompatActivity {
         Window window = getWindow();
         window.setStatusBarColor(MaterialColors.getColor(this, R.attr.onboard_status_bar_color, R.attr.colorAccent));
 
-        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        //setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-        //getWindow().setStatusBarColor(0x55000000);
-
-        adapter = new PageAdapter(this);
-        pager = findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        mAdapter = new PageAdapter(this);
+        mViewPager = findViewById(R.id.pager);
+        mViewPager.setAdapter(mAdapter);
 
         TabLayout tabs = findViewById(R.id.tabDots);
         tabs.setTabRippleColor(null);
-        new TabLayoutMediator(tabs, pager, (tab, position) -> {}).attach();
+
+        if (mAdapter.getItemCount() == 1)
+            tabs.setVisibility(View.INVISIBLE);
+
+        new TabLayoutMediator(tabs, mViewPager, (tab, position) -> {}).attach();
 
         Button btnContinue = findViewById(R.id.btn_continue);
         btnContinue.setOnClickListener(v -> {
-            int current = pager.getCurrentItem();
-            if (current == adapter.getItemCount() - 1) {
+            int current = mViewPager.getCurrentItem();
+            if (current == mAdapter.getItemCount() - 1) {
                 setOnBoardShown();
                 //LocalConfig.setConsent(true);
                 if (OnBoard.mCallback != null)
                     OnBoard.mCallback.onCompleted();
                 finish();
             } else {
-                pager.setCurrentItem(current+1);
+                mViewPager.setCurrentItem(current+1);
             }
         });
     }
