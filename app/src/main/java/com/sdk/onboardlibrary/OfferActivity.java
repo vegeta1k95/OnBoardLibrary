@@ -38,6 +38,7 @@ public class OfferActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.btn_continue).setOnClickListener(v -> {
+            OnBoardActivity.notifyOnBoardDone(this);
             Billing.startBillingActivity(this);
             finish();
         });

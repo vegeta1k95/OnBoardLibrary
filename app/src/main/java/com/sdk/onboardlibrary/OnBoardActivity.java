@@ -1,6 +1,7 @@
 package com.sdk.onboardlibrary;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ public class OnBoardActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, PollActivity.class);
                 intent.putExtra(KEY_SKIP_OFFER, getIntent().getBooleanExtra(KEY_SKIP_OFFER, false));
                 if (getIntent().getBooleanExtra(KEY_SKIP_OFFER, false))
-                    notifyOnBoardDone();
+                    notifyOnBoardDone(this);
                 startActivity(intent);
                 finish();
             });
@@ -66,8 +67,8 @@ public class OnBoardActivity extends AppCompatActivity {
         return !getSharedPreferences("onboard", MODE_PRIVATE).contains(KEY_FIRST_TIME);
     }
 
-    private void notifyOnBoardDone() {
-        getSharedPreferences("onboard", MODE_PRIVATE).edit().putBoolean(KEY_FIRST_TIME, false).apply();
+    public static void notifyOnBoardDone(Context context) {
+        context.getSharedPreferences("onboard", MODE_PRIVATE).edit().putBoolean(KEY_FIRST_TIME, false).apply();
     }
 
     @Override

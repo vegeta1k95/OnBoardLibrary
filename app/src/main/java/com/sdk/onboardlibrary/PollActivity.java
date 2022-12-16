@@ -98,6 +98,7 @@ public class PollActivity extends AppCompatActivity {
 
         btnSkip.setOnClickListener(v -> {
             if (mSkipLoadingAndOffer) {
+                OnBoardActivity.notifyOnBoardDone(this);
                 Billing.startBillingActivity(this, false);
             } else {
                 Intent intent = new Intent(this, OfferActivity.class);
@@ -127,6 +128,7 @@ public class PollActivity extends AppCompatActivity {
                     else
                         Billing.startBillingActivity(this, false);
                 }
+                OnBoardActivity.notifyOnBoardDone(this);
                 finish();
             }
         });
@@ -153,6 +155,7 @@ public class PollActivity extends AppCompatActivity {
         }
 
         if (mAdapter.getItemCount() == 0) {
+            OnBoardActivity.notifyOnBoardDone(this);
             Billing.startBillingActivity(this, false);
             finish();
         }
