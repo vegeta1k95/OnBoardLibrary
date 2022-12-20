@@ -6,7 +6,7 @@ import android.content.Intent;
 
 public class OnBoard {
 
-    interface ICallback {
+    public interface ICallback {
         void onFinish();
     }
 
