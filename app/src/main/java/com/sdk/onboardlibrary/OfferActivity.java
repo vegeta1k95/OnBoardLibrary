@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.sdk.billinglibrary.Billing;
-
 public class OfferActivity extends AppCompatActivity {
 
-    public static final String KEY_SKIP = "key_no_back";
+    public static final String KEY_NO_BACK = "key_no_back";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +22,7 @@ public class OfferActivity extends AppCompatActivity {
         ImageView btnBack = findViewById(res.getIdentifier("btn_back", "id", getPackageName()));
 
         Intent intent = getIntent();
-        boolean noBack = intent.getBooleanExtra(KEY_SKIP, false);
+        boolean noBack = intent.getBooleanExtra(KEY_NO_BACK, false);
 
         if (noBack) {
             btnBack.setVisibility(View.GONE);
@@ -37,9 +35,9 @@ public class OfferActivity extends AppCompatActivity {
             });
         }
 
-        findViewById(R.id.btn_continue).setOnClickListener(v -> {
-            OnBoardActivity.notifyOnBoardDone(this);
-            Billing.startBillingActivity(this);
+        int btnId = getResources().getIdentifier("btn_continue", "id", this.getPackageName());
+        findViewById(btnId).setOnClickListener(v -> {
+            OnBoard.mCallback.onFinish();
             finish();
         });
     }

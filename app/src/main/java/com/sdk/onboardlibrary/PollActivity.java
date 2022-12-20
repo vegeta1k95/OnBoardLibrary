@@ -16,7 +16,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.sdk.billinglibrary.Billing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +65,9 @@ public class PollActivity extends AppCompatActivity {
     private TextView tvNext;
     private TextView ivNext;
 
+    private int resIdLoading = 0;
+    private int resIdOffer = 0;
+
     public View getNextButton() {
         return btnNext;
     }
@@ -86,7 +88,9 @@ public class PollActivity extends AppCompatActivity {
         tvNext = findViewById(mRes.getIdentifier("txt_next", "id", getPackageName()));
         ivNext = findViewById(mRes.getIdentifier("arrow_next", "id", getPackageName()));
 
-        mSkipLoadingAndOffer = getIntent().getBooleanExtra(OnBoardActivity.KEY_SKIP_OFFER, false);
+        resIdLoading = mRes.getIdentifier("activity_onboard_loading", "layout", getPackageName());
+        resIdOffer = mRes.getIdentifier("activity_onboard_offer", "layout", getPackageName());
+        mSkipLoadingAndOffer = resIdOffer == 0 || resIdLoading == 0;
 
         setupTabs();
 
@@ -97,15 +101,7 @@ public class PollActivity extends AppCompatActivity {
         });
 
         btnSkip.setOnClickListener(v -> {
-            if (mSkipLoadingAndOffer) {
-                OnBoardActivity.notifyOnBoardDone(this);
-                Billing.startBillingActivity(this, false);
-            } else {
-                Intent intent = new Intent(this, OfferActivity.class);
-                intent.putExtra(OfferActivity.KEY_SKIP, true);
-                startActivity(intent);
-            }
-            finish();
+            proceedNext(false);
         });
 
         btnNext.setOnClickListener(v -> {
@@ -118,18 +114,7 @@ public class PollActivity extends AppCompatActivity {
                 }
                 mViewPager.setCurrentItem(current + 1);
             } else if (current == mPolls.size() - 1) {
-                if (mSkipLoadingAndOffer) {
-                    Billing.startBillingActivity(this, false);
-                } else {
-                    if (getResources().getIdentifier("activity_onboard_loading", "layout", getPackageName()) != 0)
-                        startActivity(new Intent(this, LoadingActivity.class));
-                    else if (getResources().getIdentifier("activity_onboard_offer", "layout", getPackageName()) != 0)
-                        startActivity(new Intent(this, OfferActivity.class));
-                    else
-                        Billing.startBillingActivity(this, false);
-                }
-                OnBoardActivity.notifyOnBoardDone(this);
-                finish();
+                proceedNext(true);
             }
         });
         btnNext.setClickable(false);
@@ -138,6 +123,24 @@ public class PollActivity extends AppCompatActivity {
         int fragment = intent.getIntExtra(KEY_FRAGMENT, 0);
         mViewPager.setCurrentItem(fragment);
         mTabLayout.setClickable(false);
+    }
+
+    private void proceedNext(boolean hasCompletedPoll) {
+        OnBoard.setOnBoardDone(this);
+        if (mSkipLoadingAndOffer) {
+            OnBoard.mCallback.onFinish();
+        } else {
+            if (resIdLoading != 0 && hasCompletedPoll)
+                startActivity(new Intent(this, LoadingActivity.class));
+            else if (resIdOffer != 0) {
+                Intent intent = new Intent(this, OfferActivity.class);
+                intent.putExtra(OfferActivity.KEY_NO_BACK, !hasCompletedPoll);
+                startActivity(intent);
+            }
+            else
+                OnBoard.mCallback.onFinish();
+        }
+        finish();
     }
 
     private void setupTabs() {
@@ -155,9 +158,7 @@ public class PollActivity extends AppCompatActivity {
         }
 
         if (mAdapter.getItemCount() == 0) {
-            OnBoardActivity.notifyOnBoardDone(this);
-            Billing.startBillingActivity(this, false);
-            finish();
+            proceedNext(false);
         }
     }
 
