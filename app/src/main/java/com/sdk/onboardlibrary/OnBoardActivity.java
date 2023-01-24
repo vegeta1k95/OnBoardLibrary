@@ -3,13 +3,16 @@ package com.sdk.onboardlibrary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -98,6 +101,13 @@ public class OnBoardActivity extends AppCompatActivity {
         new TabLayoutMediator(tabs, mViewPager, (tab, position) -> {}).attach();
 
         Button btnContinue = findViewById(R.id.btn_continue);
+
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = getTheme();
+        if (theme.resolveAttribute(R.attr.onboard_button_text_color, typedValue, true)) {
+            @ColorInt int color = typedValue.data;
+            btnContinue.setTextColor(color);
+        }
         btnContinue.setOnClickListener(v -> {
             int current = mViewPager.getCurrentItem();
             if (current == mAdapter.getItemCount() - 1) {
