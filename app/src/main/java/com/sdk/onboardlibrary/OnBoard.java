@@ -14,10 +14,14 @@ public class OnBoard {
     static IOnBoardCompleted mCallback;
 
     public static void showOnBoard(Activity activity, @Nullable IOnBoardCompleted callback) {
+        showOnBoard(activity, callback, false);
+    }
+
+    public static void showOnBoard(Activity activity, @Nullable IOnBoardCompleted callback, boolean onlyFirstTime) {
         mCallback = callback;
         if (!OnBoardActivity.isOnBoardShown(activity))
             activity.startActivity(new Intent(activity, OnBoardActivity.class));
-        else if (mCallback != null)
+        else if (mCallback != null && !onlyFirstTime)
             mCallback.onCompleted();
     }
 }
