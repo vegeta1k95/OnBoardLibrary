@@ -1,4 +1,4 @@
-package com.sdk.onboardlibrary;
+package onboard.screen;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class OnBoardActivity extends AppCompatActivity {
+public class ActivityOnBoard extends AppCompatActivity {
 
     private static final String PREFERENCES = "onboard";
     private static final String KEY_SHOWN = "shown";
