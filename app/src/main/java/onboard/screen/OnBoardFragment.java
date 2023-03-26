@@ -16,8 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
-import com.sdk.onboardlibrary.R;
-
 public class OnBoardFragment extends Fragment {
 
     @Keep
