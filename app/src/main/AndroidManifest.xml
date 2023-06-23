@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="onboard.screen">
+    package="com.sdk.onboard">
 
     <application>
-        <activity android:name=".ActivityOnBoard"/>
+        <activity android:name="com.sdk.onboard.ActivityOnBoard"/>
     </application>
 
 </manifest>

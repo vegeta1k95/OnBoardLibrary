@@ -1,4 +1,4 @@
-package onboard.screen;
+package com.sdk.onboard;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,6 +26,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import onboard.screen.R;
 
 
 public class ActivityOnBoard extends AppCompatActivity {

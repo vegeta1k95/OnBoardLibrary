@@ -1,4 +1,4 @@
-package onboard.screen;
+package com.sdk.onboard;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
+
+import onboard.screen.R;
 
 public class OnBoardFragment extends Fragment {
 

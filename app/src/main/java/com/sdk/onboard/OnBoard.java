@@ -1,6 +1,6 @@
-package onboard.screen;
+package com.sdk.onboard;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.Nullable;
@@ -13,11 +13,11 @@ public class OnBoard {
 
     static IOnBoardCompleted mCallback;
 
-    public static void showOnBoard(Activity activity, @Nullable IOnBoardCompleted callback) {
+    public static void showOnBoard(Context activity, @Nullable IOnBoardCompleted callback) {
         showOnBoard(activity, callback, false);
     }
 
-    public static void showOnBoard(Activity activity, @Nullable IOnBoardCompleted callback, boolean onlyFirstTime) {
+    public static void showOnBoard(Context activity, @Nullable IOnBoardCompleted callback, boolean onlyFirstTime) {
         mCallback = callback;
         if (!ActivityOnBoard.isOnBoardShown(activity))
             activity.startActivity(new Intent(activity, ActivityOnBoard.class));
