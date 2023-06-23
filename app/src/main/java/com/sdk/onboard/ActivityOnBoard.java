@@ -27,7 +27,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.ArrayList;
 import java.util.List;
 
-import onboard.screen.R;
+import com.sdk.onboard.R;
 
 
 public class ActivityOnBoard extends AppCompatActivity {
