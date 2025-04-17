@@ -6,7 +6,7 @@ plugins {
 android {
 
     android {
-        namespace 'com.sdk.billinglibrary'
+        namespace 'com.sdk.onboard'
     }
 
     defaultConfig {
