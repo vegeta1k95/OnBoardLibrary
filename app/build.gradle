@@ -29,6 +29,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()    // if you want sources attached
+            // withJavadocJar() // in AGP ≥7.4
+        }
+    }
 }
 
 dependencies {
@@ -41,7 +48,7 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.findByName('release')
+                from components.release
                 groupId = 'com.github.vegeta1k95'
                 artifactId = 'OnBoardLibrary'
             }
