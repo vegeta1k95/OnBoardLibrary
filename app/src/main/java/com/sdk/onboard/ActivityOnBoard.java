@@ -5,10 +5,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.Insets;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.Button;
 
@@ -87,8 +92,30 @@ public class ActivityOnBoard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_board);
 
+        int colorStatusBar = MaterialColors.getColor(this,
+                R.attr.onboard_status_bar_color,
+                com.google.android.material.R.attr.colorAccent);
+
         Window window = getWindow();
-        window.setStatusBarColor(MaterialColors.getColor(this, R.attr.onboard_status_bar_color, com.google.android.material.R.attr.colorAccent));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            View statusBarBg = findViewById(R.id.status_bar_bg);
+            window.getDecorView().setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+                @NonNull
+                @Override
+                public WindowInsets onApplyWindowInsets(@NonNull View view, @NonNull WindowInsets insets) {
+                    Insets statusBarInsets = insets.getInsets(WindowInsets.Type.statusBars());
+                    // Update height and color of your custom status bar view only
+                    ViewGroup.LayoutParams params = statusBarBg.getLayoutParams();
+                    params.height = statusBarInsets.top;
+                    statusBarBg.setLayoutParams(params);
+                    statusBarBg.setBackgroundColor(colorStatusBar);
+                    return insets;
+                }
+            });
+        } else {
+            window.setStatusBarColor(colorStatusBar);
+        }
 
         mAdapter = new PageAdapter(this);
         mViewPager = findViewById(R.id.pager);
