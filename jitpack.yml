@@ -1,4 +1,2 @@
 jdk:
   - openjdk17
-install:
-  - FILE="-Dfile=OnBoardLibrary-1.0.4.3.aar"
