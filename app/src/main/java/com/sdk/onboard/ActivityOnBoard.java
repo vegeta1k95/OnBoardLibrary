@@ -88,7 +88,7 @@ public class ActivityOnBoard extends AppCompatActivity {
         setContentView(R.layout.activity_on_board);
 
         Window window = getWindow();
-        window.setStatusBarColor(MaterialColors.getColor(this, R.attr.onboard_status_bar_color, R.attr.colorAccent));
+        window.setStatusBarColor(MaterialColors.getColor(this, R.attr.onboard_status_bar_color, com.google.android.material.R.attr.colorAccent));
 
         mAdapter = new PageAdapter(this);
         mViewPager = findViewById(R.id.pager);
