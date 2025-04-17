@@ -5,6 +5,7 @@ plugins {
 
 android {
 
+    compileSdkVersion 35
     buildToolsVersion "35.0.0"
     namespace = "com.sdk.onboard"
 
@@ -35,7 +36,7 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release
+                from components.findByName('release')
                 groupId = 'com.github.vegeta1k95'
                 artifactId = 'OnBoardLibrary'
             }
