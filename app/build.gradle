@@ -7,7 +7,7 @@ android {
 
     compileSdkVersion 35
     buildToolsVersion "35.0.0"
-    namespace = "com.sdk.onboard"
+    namespace "com.sdk.onboard"
 
     defaultConfig {
         minSdk 23
