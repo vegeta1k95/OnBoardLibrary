@@ -100,16 +100,21 @@ public class ActivityOnBoard extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             View statusBarBg = findViewById(R.id.status_bar_bg);
+            View bottomBarBg = findViewById(R.id.bottom_bar_bg);
             window.getDecorView().setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
                 @NonNull
                 @Override
                 public WindowInsets onApplyWindowInsets(@NonNull View view, @NonNull WindowInsets insets) {
                     Insets statusBarInsets = insets.getInsets(WindowInsets.Type.statusBars());
                     // Update height and color of your custom status bar view only
-                    ViewGroup.LayoutParams params = statusBarBg.getLayoutParams();
-                    params.height = statusBarInsets.top;
-                    statusBarBg.setLayoutParams(params);
+                    ViewGroup.LayoutParams paramsTop = statusBarBg.getLayoutParams();
+                    paramsTop.height = statusBarInsets.top;
+                    statusBarBg.setLayoutParams(paramsTop);
                     statusBarBg.setBackgroundColor(colorStatusBar);
+
+                    ViewGroup.LayoutParams paramsBottom = bottomBarBg.getLayoutParams();
+                    paramsBottom.height = statusBarInsets.bottom;
+                    bottomBarBg.setLayoutParams(paramsBottom);
                     return insets;
                 }
             });

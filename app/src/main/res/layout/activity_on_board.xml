@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/onboard_background_color">
-
     <!-- Status Bar Background -->
     <View
         android:id="@+id/status_bar_bg"
@@ -16,6 +15,7 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
+        android:layout_below="@id/status_bar_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -41,12 +41,19 @@
         android:id="@+id/tabDots"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/_30sdp"
         android:background="?attr/onboard_background_color"
+        android:layout_above="@id/bottom_bar_bg"
         app:tabBackground="@drawable/tab_selector"
         app:tabGravity="center"
         app:tabMaxWidth="15dp"
         app:tabIndicatorHeight="0dp"/>
+
+    <View
+        android:id="@+id/bottom_bar_bg"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent" />
 
 </RelativeLayout>
