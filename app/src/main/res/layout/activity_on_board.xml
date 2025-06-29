@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="?attr/onboard_background_color">
-    <!-- Status Bar Background -->
+
     <View
         android:id="@+id/status_bar_bg"
         android:layout_width="match_parent"
