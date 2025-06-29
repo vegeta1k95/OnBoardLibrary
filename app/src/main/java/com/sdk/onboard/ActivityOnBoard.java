@@ -172,7 +172,7 @@ public class ActivityOnBoard extends AppCompatActivity {
 
         ViewGroup tabStrip = (ViewGroup) tabs.getChildAt(0);
         View fakeTabView = tabStrip.getChildAt(tabs.getTabCount() - 1);
-        fakeTabView.setBackground(getDrawable(R.drawable.tab_selector));
+        //fakeTabView.setBackground(getDrawable(R.drawable.tab_selector));
         fakeTabView.setEnabled(false); // disables click feedback
         fakeTabView.setClickable(false); // disables interaction
 
