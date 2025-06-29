@@ -12,5 +12,6 @@
 
     <attr name="onboard_button_color" format="reference|color"/>
     <attr name="onboard_button_text_color" format="reference|color"/>
+    <attr name="onboard_button_caps" format="reference|boolean"/>
 
 </resources>
