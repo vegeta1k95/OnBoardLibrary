@@ -2,45 +2,33 @@
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true">
-        <inset
-            android:insetLeft="8dp"
-            android:insetRight="8dp">
-            <shape
-                android:innerRadius="0dp"
-                android:shape="ring"
-                android:thickness="4dp"
-                android:useLevel="false">
-                <solid android:color="?attr/onboard_tabs_selected_color"/>
-            </shape>
-        </inset>
+        <shape
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thickness="4dp"
+            android:useLevel="false">
+            <solid android:color="?attr/onboard_tabs_selected_color"/>
+        </shape>
     </item>
 
     <item android:state_pressed="true">
-        <inset
-            android:insetLeft="8dp"
-            android:insetRight="8dp">
-            <shape
-                android:innerRadius="0dp"
-                android:shape="ring"
-                android:thickness="4dp"
-                android:useLevel="false">
-                <solid android:color="?attr/onboard_tabs_unselected_color"/>
-            </shape>
-        </inset>
+        <shape
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thickness="4dp"
+            android:useLevel="false">
+            <solid android:color="?attr/onboard_tabs_unselected_color"/>
+        </shape>
     </item>
 
     <item>
-        <inset
-            android:insetLeft="8dp"
-            android:insetRight="8dp">
-            <shape
-                android:innerRadius="0dp"
-                android:shape="ring"
-                android:thickness="4dp"
-                android:useLevel="false">
-                <solid android:color="?attr/onboard_tabs_unselected_color"/>
-            </shape>
-        </inset>
+        <shape
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thickness="4dp"
+            android:useLevel="false">
+            <solid android:color="?attr/onboard_tabs_unselected_color"/>
+        </shape>
     </item>
 
 </selector>

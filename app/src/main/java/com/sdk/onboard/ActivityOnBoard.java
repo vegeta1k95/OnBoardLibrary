@@ -154,6 +154,15 @@ public class ActivityOnBoard extends AppCompatActivity {
                 mViewPager.setCurrentItem(current+1);
             }
         });
+
+        ViewGroup tabStrip = (ViewGroup) tabs.getChildAt(0);
+        for (int i = 0; i < tabStrip.getChildCount(); i++) {
+            View tabView = tabStrip.getChildAt(i);
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) tabView.getLayoutParams();
+            params.setMargins(32, 0, 32, 0); // 32px left and right margins
+            tabView.setLayoutParams(params);
+            tabView.requestLayout();
+        }
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
