@@ -155,11 +155,32 @@ public class ActivityOnBoard extends AppCompatActivity {
             }
         });
 
+        // Add fake tab at the end
+        TabLayout.Tab fakeTab = tabs.newTab();
+        tabs.addTab(fakeTab, false);
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == tabs.getTabCount() - 1 && tab.getText() == null) {
+                    // Fake tab clicked, revert selection
+                    tabs.selectTab(tabs.getTabAt(0)); // or previous tab
+                }
+            }
+            @Override public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override public void onTabReselected(TabLayout.Tab tab) {}
+        });
+
         ViewGroup tabStrip = (ViewGroup) tabs.getChildAt(0);
+        View fakeTabView = tabStrip.getChildAt(tabs.getTabCount() - 1);
+        fakeTabView.setBackground(getDrawable(R.drawable.tab_selector));
+        fakeTabView.setEnabled(false); // disables click feedback
+        fakeTabView.setClickable(false); // disables interaction
+
+        // Make tabs more spread out horizontally
         for (int i = 0; i < tabStrip.getChildCount(); i++) {
             View tabView = tabStrip.getChildAt(i);
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) tabView.getLayoutParams();
-            params.setMargins(32, 0, 32, 0); // 32px left and right margins
+            params.setMargins(20, 0, 20, 0); // 32px left and right margins
             tabView.setLayoutParams(params);
             tabView.requestLayout();
         }
