@@ -32,8 +32,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sdk.onboard.R;
-
 
 public class ActivityOnBoard extends AppCompatActivity {
 
@@ -94,7 +92,7 @@ public class ActivityOnBoard extends AppCompatActivity {
 
         int colorStatusBar = MaterialColors.getColor(this,
                 R.attr.onboard_status_bar_color,
-                com.google.android.material.R.attr.colorAccent);
+                Color.TRANSPARENT);
 
         Window window = getWindow();
 
